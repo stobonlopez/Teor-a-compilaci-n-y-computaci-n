@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
+
 #
-# 1.- La funcion cutc permite extraer campos de una lista de cadenas de
-#     caracteres. Los campos estan delimitados por caracteres.
+# 1.- La funcion cutc permite extraer campos de una lista de cadenas de
+#     caracteres. Los campos estan delimitados por caracteres.
 #
 #     Ejemplo.
 #     >>> x = ['uno:dos:tres',  'alpha:beta:omega']
 #     >>> print(cutc(x, ':', 1, None))
 #     ['dos', 'beta']
-#     >>> print(cut(x, ':', 1, 2))
+#     >>> print(cut(x, ':', 1, 2))
 #     ['dos:tres', 'beta:omega']
 #     >>> print(cut(x, ':', None, 1))
 #     ['uno:dos',  'alpha:beta']
@@ -16,23 +16,29 @@ def cutc(x, delim, n=None, m=None):
     a = []
     b = []
     if n is not None and m is not None:
-        for i in range(len(x)):
-            aux = x[i].split(delim)[n:m+1]
-            a.append(aux)
-            b.append(delim.join(a[i]))
+        if n > len(x):
+            return ''
+        else: 
+            for i in range(len(x)):
+                aux = x[i].split(delim)[n:m+1]
+                a.append(aux)
+                b.append(delim.join(a[i]))
     elif n is None:
         for i in range(len(x)):
             aux = x[i].split(delim)[:m+1]
             a.append(aux)
             b.append(delim.join(a[i]))
     elif m is None:
-        for i in range(len(x)):
-            aux = x[i].split(delim)[n]
-            a.append(aux)
-            b.append("".join(a[i]))
+        if n > len(x):
+            return ''
+        else:
+            for i in range(len(x)):
+                aux = x[i].split(delim)[n]
+                a.append(aux)
+                b.append("".join(a[i]))
         
     else:
-        return 'No me meter ambos None'
+        return 'No meter ambos None'
     
     return(b)
 
@@ -112,3 +118,6 @@ def uniqc(x, delim):
 #     [mundo', 'feliz']
 #
 def selc(x, n, delim):
+    #
+    return(x)
+    #
