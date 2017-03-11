@@ -18,7 +18,7 @@ def cutc(x, delim, n=None, m=None):
     if n is not None and m is not None:
         if n > len(x):
             return ''
-        else: 
+        else:
             for i in range(len(x)):
                 aux = x[i].split(delim)[n:m+1]
                 a.append(aux)
@@ -33,13 +33,13 @@ def cutc(x, delim, n=None, m=None):
             return ''
         else:
             for i in range(len(x)):
-                aux = x[i].split(delim)[n]
+                aux = x[i].split(delim)[n:n+1]
                 a.append(aux)
-                b.append("".join(a[i]))
-        
+                b.append(''.join(a[i]))
+
     else:
         return 'No meter ambos None'
-    
+
     return(b)
 
 # 
@@ -57,9 +57,15 @@ def cutc(x, delim, n=None, m=None):
 #     ['linea 1;x', 'linea 2;y, 'linea 3;z', 'a', 'b']
 #
 def pastec(x, y, delim):
-    #
-    return(x)
-    #
+  a = []
+  for i in range(max(len(x), len(y))):
+    if i < len(x) and i < len(y):
+      a.append(str(x[i]) + delim + str(y[i]))
+    elif i < len(x) and i >= len(y):
+      a.append(str(x[i]))
+    elif i < len(y):
+      a.append(y[i])
+  return(a)
 
 #
 # 3.- La funcion wcc cuenta la ocurrencia de palabras en una lista de
@@ -72,9 +78,12 @@ def pastec(x, y, delim):
 #     {'hola':3, 'mundo':2, 'feliz':2}
 #
 def wcc(x, delim):
-    #
-    return(x)
-    #
+  dict = {}
+  r = delim.join(x).split(delim)
+  for i in r:
+     dict[i] = r.count(i)
+
+  return(dict)
 
 #
 # 4.- La funcion sortw ordena las palabras en una lista de cadenas de
@@ -87,9 +96,7 @@ def wcc(x, delim):
 #     ['feliz', 'feliz', 'hola', 'hola', 'hola','mundo', 'mundo']
 #
 def sortw(x, delim):
-    #
-    return(x)
-    #
+    return(sorted(delim.join(x).split(delim)))
 
 #
 # 5.- La funcion uniqc genera una lista compuesta por las palabras que
@@ -102,9 +109,8 @@ def sortw(x, delim):
 #     ['hola', 'mundo', 'feliz']
 #
 def uniqc(x, delim):
-    #
-    return(x)
-    #
+    return(sorted(set(delim.join(x).split(delim))))
+
 
 #
 # 6.- La funcion selc genera una lista compuesta por las palabras que
@@ -118,6 +124,10 @@ def uniqc(x, delim):
 #     [mundo', 'feliz']
 #
 def selc(x, n, delim):
-    #
-    return(x)
+  r = delim.join(x).split(delim)
+  a = []
+  for i in r:
+    if r.count(i) == n:
+      a.append(i)
+  return(sorted(set(a)))
     #
